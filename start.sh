@@ -1,16 +1,26 @@
-# start redis
+#!/bin/bash
+
+# fetch docker containers
+sudo docker pull paintedfox/postgresql
+sudo docker pull dockerfile/redis
+sudo docker pull ehazlett/memcached
+
+# build app container
+sudo docker build -t $USER/test_app .
+
+# start redis container
 sudo docker run \
     -d \
     --name redis \
     dockerfile/redis
 
-# start memcached
+# start memcached container
 sudo docker run \
     -d \
     --name memcached \
-    ehazlett/memcache
+    ehazlett/memcached
 
-# start postgres
+# start postgres container
 sudo docker run \
     -d \
     --name="postgresql" \
@@ -27,4 +37,4 @@ sudo docker run \
     --link memcached:memcached \
     --link postgresql:postgresql \
     --name webapp \
-    cburmeister/test_app:latest
+    $USER/test_app:latest
