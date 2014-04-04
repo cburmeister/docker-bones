@@ -1,0 +1,6 @@
+Flask==0.10.1
+Flask-SQLAlchemy==1.0
+gunicorn==18.0
+redis==2.8.0
+python-memcached==1.53
+psycopg2==2.5.2
