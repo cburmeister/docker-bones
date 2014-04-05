@@ -20,6 +20,6 @@ WORKDIR /test_app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 80
+EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "test_app:app"]

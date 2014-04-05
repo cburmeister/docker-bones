@@ -1,27 +1,27 @@
 #!/bin/bash
 
 # fetch docker containers
-sudo docker pull paintedfox/postgresql
-sudo docker pull dockerfile/redis
-sudo docker pull ehazlett/memcached
+docker pull paintedfox/postgresql
+docker pull dockerfile/redis
+docker pull ehazlett/memcached
 
 # build app container
-sudo docker build -t $USER/test_app .
+docker build -t $USER/test_app .
 
 # start redis container
-sudo docker run \
+docker run \
     -d \
     --name redis \
     dockerfile/redis
 
 # start memcached container
-sudo docker run \
+docker run \
     -d \
     --name memcached \
     ehazlett/memcached
 
 # start postgres container
-sudo docker run \
+docker run \
     -d \
     --name="postgresql" \
     -e USER="some_random_username" \
@@ -30,9 +30,9 @@ sudo docker run \
     paintedfox/postgresql
 
 # start app server
-sudo docker run \
+docker run \
     -d \
-    -p 80:80 \
+    -p 5000 \
     --link redis:redis \
     --link memcached:memcached \
     --link postgresql:postgresql \
